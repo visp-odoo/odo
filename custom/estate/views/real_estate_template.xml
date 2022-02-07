@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="hello_world" name="Hello World">
+        <h4><strong>Hello World</strong></h4>
+    </template>
+
+    <template id="property_list">
+        <div><t t-out="SomeAdditionalData"/></div>
+        <div class="table">
+            <table>
+                <thead>
+                    <th>srno</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>State</th>
+                </thead>
+                <tbody>
+                    <t t-set="srno" t-value="0"/>
+                    <t t-foreach="property" t-as="prop">
+                        <t t-set="srno" t-value="srno + 1"/>
+                        <!-- <tr t-att-class="sequence % 2 == 0 and 'o_even' or ''"> -->
+                        <!--<tr t-attf-style="font-weight: bold;#{sequence % 2 == 0 and 'background: grey;' or ''}">-->
+                        <tr>
+                            <td><t t-out="srno" /></td>
+                            
+                            <td><t t-out="prop.name" /></td>
+                            
+                            <td>
+                                <t t-if="prop.description" t-out="prop.description" />
+                                <t t-else="">No Description Available</t>
+                            </td>
+                            
+                            <td><span t-field="prop.state"/></td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>    
+        </div>
+    </template>
+
+
+    <template id="hello_user" name="Bla Bla">
+        <h4><strong>Hello <t t-out="user.name"/></strong></h4>
+        <t t-call="estate.property_list">
+            <t t-set="SomeAdditionalData">Hello</t>
+        </t>
+    </template>
+
+
+
+    <!-- <template id="property_user" name="real_estate_user">
+        <t t-call="website.layout">
+             <div class="container">
+                hello real estate use...
+            </div>
+        </t>
+    </template>
+     -->
+
+</odoo>
+
